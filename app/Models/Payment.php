@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Payment extends Model
 {
-    protected $fillable = ['lease_id', 'amount', 'payment_date', 'payment_method', 'receipt_number'];
+    protected $fillable = ['lease_id', 'rent_installment_id', 'amount', 'payment_date', 'payment_method', 'receipt_number'];
 
     protected function casts(): array
     {
@@ -17,5 +17,10 @@ class Payment extends Model
     public function lease(): BelongsTo
     {
         return $this->belongsTo(Lease::class);
+    }
+
+    public function installment(): BelongsTo
+    {
+        return $this->belongsTo(RentInstallment::class, 'rent_installment_id');
     }
 }
